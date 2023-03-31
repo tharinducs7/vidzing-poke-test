@@ -17,7 +17,7 @@ yarn install && yarn dev
 
 ## Redux and Sagas
 
-The boiler plate code for redux and redux-saga has been set for you. You will be required to use the
+You will be required to use the
 > getPokemonListSaga
 
 To fetch pokemon data from the pokeApi to be used in the following tasks.
@@ -57,4 +57,7 @@ The page must have the following functionality.
 
 ## Submission:
 
-After you have finished this project, please create a Github repository with your updates.
+We are an agile company, please pay especial attention to push small batches of commits to your forked project. Give each commit a significant name and even a description if you want to. 
+We will be looking at your commit history so we can understand better the way you work. If you work locally and end up pushing just one commit, it means you do things in waterfall and that's something we don't really like.
+
+If you have doubts please ask your recruiter to pass you Raul's email and feel free to ask ANYTHING. 

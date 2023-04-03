@@ -7,7 +7,7 @@
     flex: 1 1 200px;
     margin: 10px;
     padding: 20px;
-   // background-color: #eee;
+    // background-color: #eee;
     text-align: center;
 
     img {
@@ -35,4 +35,35 @@
     color: #fff;
     font-size: 24px;
     font-weight: bold;
+
+    .search-bar {
+        display: block;
+        align-items: right;
+
+        input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 5px;
+            font-size: 14px;
+
+            &:focus {
+                outline: none;
+                border-color: blue;
+            }
+        }
+
+        button {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #eee;
+            font-size: 14px;
+
+            &:hover {
+                background-color: lightblue;
+                cursor: pointer;
+            }
+        }
+    }
 }

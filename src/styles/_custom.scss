@@ -16,12 +16,12 @@
     height: 100vh;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-}
+// .header {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 1rem;
+// }
 
 .sidebar-toggle {
     font-size: 1rem;
@@ -39,29 +39,29 @@
     flex-direction: column;
 }
 
-.search-box {
-    display: flex;
-    margin-bottom: 1rem;
+// .search-box {
+//     display: flex;
+//     margin-bottom: 1rem;
 
-    input[type='text'] {
-        flex: 1;
-        padding: 0.5rem;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-right: none;
-        border-radius: 4px 0 0 4px;
-    }
+//     input[type='text'] {
+//         flex: 1;
+//         padding: 0.5rem;
+//         font-size: 1rem;
+//         border: 1px solid #ccc;
+//         border-right: none;
+//         border-radius: 4px 0 0 4px;
+//     }
 
-    button {
-        padding: 0.5rem 1rem;
-        background-color: #0077c2;
-        color: #fff;
-        font-size: 1rem;
-        border: none;
-        border-radius: 0 4px 4px 0;
-        cursor: pointer;
-    }
-}
+//     button {
+//         padding: 0.5rem 1rem;
+//         background-color: #0077c2;
+//         color: #fff;
+//         font-size: 1rem;
+//         border: none;
+//         border-radius: 0 4px 4px 0;
+//         cursor: pointer;
+//     }
+// }
 
 .pokemon-list {
     display: grid;
@@ -102,4 +102,37 @@
 h2 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
+}
+
+.header {
+    background-color: #F44336;
+    color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.search-box {
+    width: 60%;
+}
+
+.search-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    font-size: 1rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }

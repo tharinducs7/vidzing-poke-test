@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { padWithLeadingZeros } from '@/utils/helpers';
 // import './card.scss';

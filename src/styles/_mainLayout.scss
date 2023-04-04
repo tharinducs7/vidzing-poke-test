@@ -1,0 +1,40 @@
+.main-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+
+    &__sidebar {
+        flex: 0 0 auto;
+        background-color: rgb(255, 255, 255);
+        transition: transform 0.3s ease-out;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+
+        &--open {
+            width: 300px;
+            transform: translateX(0);
+        }
+    }
+
+    &__content {
+        flex: 1 1 auto;
+        background-color: white;
+        transition: width 0.3s ease-out;
+
+        &--shrink {
+            margin-left: 300px;
+            width: calc(100% - 300px);
+        }
+
+        &--streatch {
+            width: 100%;
+        }
+    }
+
+    
+}

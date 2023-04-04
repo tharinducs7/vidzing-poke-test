@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonList } from "@/store/pokemon/actions";
 import Image from "next/image";
+import MainLayout from "@/shared/Layouts/MainLayout";
 
 import Card from "@/components/card/Card";
 
@@ -68,55 +70,54 @@ export default function Home() {
       </Head>
       <main>
         <div className="app">
-          <header className="header">
-            <div className="header-container">
-              <h1 className="header-title">Pokedex</h1>
-              <div className="search-box">
-                <input type="text" placeholder="Search for a Pokemon..." onChange={handleSearch} />
-              </div>
-            </div>
-          </header>
-          <main className="main">
-            <button className="sidebar-toggle" onClick={toggleSidebar}>
-              {isSidebarOpen ? 'Close Sidebar' : 'Open Sidebar'}
-            </button>
-            <div className="pokemon-list">
-              <div className="flex-container">
-                {filteredPokemons.map((pokemon: any, key: number) => (
-                  <div className="flex-item" key={key}>
-                    <Card pokemon={pokemon} addToTeam={handleAddToTeam} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </main>
-          <div
-            className={`sidebar-wrapper ${isSidebarOpen ? 'open' : 'closed'}`}
-            onClick={toggleSidebar}
-          >
-            <div className="sidebar">
+
+
+          <MainLayout
+            teamLength={team.length}
+            sidebar={<div className="sidebar">
               <div className="container">
                 <img
                   alt="Official Pokemon Logo"
                   className="pokemon-logo"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
                 />
-                <div className="pokemon-list">
-                  {team.map((pokemon: any, key: number) => (
-                    <div className="pokemon-item" key={key}>
-                      <div className="pokemon-image">
-                        <img alt={pokemon.name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`} />
-                      </div>
-                      <div className="pokemon-detail">
-                        <span className="pokemon-detail__id">#001</span>
-                        <span className="pokemon-detail__name">{pokemon.name}</span>
-                      </div>
+                <div className="drop">
+                  <div className="drop__container">
+                    <div className="drop__list" id="drop-items">
+                      {team.map((pokemon: any, key: number) => (
+                        <div className="drop__card" key={key}>
+                          <div className="drop__data">
+                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`} alt="" className="drop__img" />
+                            <div>
+                              <h1 className="drop__name">{pokemon.name}</h1>
+                              <span className="drop__profession">Front-End Developer</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <a href="#" className="drop__social"><i className='bx bxl-instagram'></i> b </a>
+                            <a href="#" className="drop__social"><i className='bx bxl-linkedin'></i> f</a>
+                            <a href="#" className="drop__social"><i className='bx bxl-twitter'></i>f</a>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </div>}
+            content={<>
+              <div className="flex-container">
+                {filteredPokemons.map((pokemon: any, key: number) => (
+                  <div className="flex-item" key={key}>
+                    <div className="contenedorCards">
+                      <Card pokemon={pokemon} addToTeam={handleAddToTeam} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>}
+          />
         </div>
       </main>
     </>

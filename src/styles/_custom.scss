@@ -16,13 +16,6 @@
     height: 100vh;
 }
 
-// .header {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     padding: 1rem;
-// }
-
 .sidebar-toggle {
     font-size: 1rem;
     padding: 0.5rem;
@@ -39,100 +32,52 @@
     flex-direction: column;
 }
 
-// .search-box {
-//     display: flex;
-//     margin-bottom: 1rem;
-
-//     input[type='text'] {
-//         flex: 1;
-//         padding: 0.5rem;
-//         font-size: 1rem;
-//         border: 1px solid #ccc;
-//         border-right: none;
-//         border-radius: 4px 0 0 4px;
-//     }
-
-//     button {
-//         padding: 0.5rem 1rem;
-//         background-color: #0077c2;
-//         color: #fff;
-//         font-size: 1rem;
-//         border: none;
-//         border-radius: 0 4px 4px 0;
-//         cursor: pointer;
-//     }
-// }
-
 .pokemon-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
 }
 
-.sidebar-wrapper {
+.search-box {
     position: fixed;
     top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+    width: 60%;
+    height: 50px;
+    background-color: #fff;
+    z-index: 10;
+    display: flex;
+    margin-bottom: 2rem;
+    padding: 5px;
 
-    &.open {
-        opacity: 1;
-        visibility: visible;
+    input[type='text'] {
+        flex: 1;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 20px 0 0 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        background-color: #0077c2;
+        color: #fff;
+        font-size: 1rem;
+        border: none;
+        border-radius: 0 20px 20px 0;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+            background-color: #005ea6;
+        }
     }
 }
 
-.sidebar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 300px;
-    background-color: #fff;
-    padding: 1rem;
-    box-shadow: -4px 0 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+.shrink {
+    width: calc(100% - 300px);
 }
 
-h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.header {
-    background-color: #F44336;
-    color: white;
-    padding: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.header-title {
-    margin: 0;
-    font-size: 2rem;
-}
-
-.search-box {
-    width: 60%;
-}
-
-.search-box input[type="text"] {
+.strech {
     width: 100%;
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-    font-size: 1rem;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }

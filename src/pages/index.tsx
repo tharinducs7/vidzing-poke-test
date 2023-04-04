@@ -12,8 +12,6 @@ import Card from "@/components/Card";
 import TeamPanel from "@/components/TeamPanel";
 
 import { TOAST_MESSAGES } from "@/utils/constants";
-
-
 interface Pokemon {
   id: number;
   name: string;
@@ -29,6 +27,7 @@ export default function Home() {
   const [team, setTeam] = useState<Pokemon[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
+  const [isTeamCreated, setIsTeamCreated] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -116,11 +115,15 @@ export default function Home() {
    * Save Pokemon Team
    */
   const saveTeam = () => {
+    let sortTeam = team.sort((a: any, b: any) => b.order - a.order)
+
     const Team = {
-      members: team,
+      members: sortTeam,
       id: 1
     }
+
     dispatch(addPokemonTeam(Team));
+    setIsTeamCreated(true)
   }
 
   return (
@@ -143,6 +146,7 @@ export default function Home() {
             sidebarOpen={isSidebarOpen}
             toggleSidebar={toggleSidebar}
             sidebar={<TeamPanel
+              isTeamCreated={isTeamCreated}
               toggleSidebar={toggleSidebar}
               team={team}
               saveTeam={saveTeam}

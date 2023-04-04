@@ -110,6 +110,7 @@
     justify-content: space-between;
     padding: 10px;
     background-color: #eee;
+    height: 5em;
 }
 
 .header__leftButton {
@@ -134,6 +135,15 @@
     }
 }
 
+.search_icon {
+    background-color: #1562cc;
+    padding: 10px;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    line-height: 1.2;
+}
+
 .header__center {
     flex-grow: 1;
     display: flex;
@@ -142,10 +152,12 @@
 }
 
 .header__searchBox {
-    padding: 8px;
+    padding: 10px;
     border: 2px blue;
-    border-radius: 20px;
-    width: 50%
+    border-radius: 3px;
+    width: 60%;
+    height: 2.7em;
+    font-size: 15px;
 }
 
 .header__right {
@@ -159,13 +171,13 @@
 
 @media screen and (max-width: 768px) {
     .header {
-        flex-wrap: wrap;
+        display: flex;
         justify-content: center;
     }
 
     .header__leftButton,
     .header__right {
-        margin: 10px 0;
+        margin: 10px;
     }
 
     .header__center {

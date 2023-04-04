@@ -44,7 +44,7 @@ const TeamPanel = ({ handleRemoveFromTeam, handleDragStart, handleDragOver, team
                             ))}
                         </div>
                     </div>
-                    {team.length === 6 && <button className="button-10" role="button" onClick={() => saveTeam()}>Save Team</button>}
+                    {team.length > 1 && <button className="button-10" role="button" onClick={() => saveTeam()}>Save Team</button>}
                     {team.length === 0 && 
                         <>
                             <h2 className='no-team'>Build Your offshore pokemon team</h2>

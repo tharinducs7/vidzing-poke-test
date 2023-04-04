@@ -26,7 +26,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, search, searc
             <i className='bx bx-menu' style={{ color: "#fdf500" }} ></i>
           </button>
           <div className="header__center">
-            <input type="text" className="header__searchBox" value={searchTerm} placeholder="Find your pokemon...." onChange={(e) => search(e)} />
+            <i className="bx bx-search search_icon"></i>
+            <input type="text" className="header__searchBox" value={searchTerm} placeholder="Look for Pokemon to add to your team ... 😎" onChange={(e) => search(e)} />
           </div>
         </div>
         {content}

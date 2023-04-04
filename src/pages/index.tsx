@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPokemonList } from "@/store/pokemon/actions";
 import Image from "next/image";
 import MainLayout from "@/shared/Layouts/MainLayout";
-
 import Card from "@/components/Card";
 import TeamCard from "@/components/TeamCard";
 
@@ -23,6 +22,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [team, setTeam] = useState<Pokemon[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -51,11 +51,21 @@ export default function Home() {
     setTeam(team.filter((p) => p !== pokemon));
   };
 
-  const handleTeamOrderChange = (event: any, oldIndex: number, newIndex: number) => {
-    const newTeam = [...team];
-    newTeam.splice(oldIndex, 1);
-    newTeam.splice(newIndex, 0, team[oldIndex]);
-    setTeam(newTeam);
+  const handleDragStart = (event: React.DragEvent<HTMLLIElement>, index: number) => {
+    setDraggingIndex(index);
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLLIElement>, index: number) => {
+    event.preventDefault();
+    const targetIndex = index;
+    if (draggingIndex === null || draggingIndex === targetIndex) {
+      return;
+    }
+    const newPokemonList = [...team];
+    const [removed] = newPokemonList.splice(draggingIndex, 1);
+    newPokemonList.splice(targetIndex, 0, removed);
+    setTeam(newPokemonList);
+    setDraggingIndex(targetIndex);
   };
 
   return (
@@ -86,9 +96,16 @@ export default function Home() {
                 <div className="team">
                   <div className="team__container">
                     <div className="team__list" id="team-items">
-                      {team.map((pokemon: any, key: number) => (
-                        <TeamCard pokemon={pokemon} key={key} handleRemoveFromTeam={handleRemoveFromTeam}/>
-                      ))}
+                        {team.map((pokemon: any, key: number) => (
+                          <TeamCard 
+                            pokemon={pokemon} 
+                            key={key} 
+                            index={key}
+                            handleRemoveFromTeam={handleRemoveFromTeam} 
+                            handleDragStart={handleDragStart}
+                            handleDragOver={handleDragOver} 
+                          />
+                        ))}
                     </div>
                   </div>
                 </div>

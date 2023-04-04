@@ -16,7 +16,26 @@ export type GetPokemonListFailure = {
   payload: string;
 };
 
+
+/****************************** ADD POKEMON TEAM **********************************/
+export type AddPokemonTeam = {
+  type: typeof actionTypes.ADD_POKEMON_TEAM;
+};
+
+export type AddPokemonTeamSuccess = {
+  type: typeof actionTypes.ADD_POKEMON_TEAM_SUCCESS;
+  payload: PokemonInterface[];
+};
+
+export type AddPokemonTeamFailure = {
+  type: typeof actionTypes.ADD_POKEMON_TEAM_FAILURE;
+  payload: string;
+};
+
 export type PokemonActions =
   | GetPokemonList
   | GetPokemonListSuccess
-  | GetPokemonListFailure;
+  | GetPokemonListFailure
+  | AddPokemonTeam
+  | AddPokemonTeamSuccess
+  | AddPokemonTeamFailure;

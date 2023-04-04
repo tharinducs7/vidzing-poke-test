@@ -20,3 +20,22 @@ export const getPokemonListFailure = (
   type: actionTypes.GET_POKEMON_LIST_FAILURE,
   payload,
 });
+
+/****************************** ADD POKEMON TEAM **********************************/
+export const addPokemonTeam = (): types.AddPokemonTeam => ({
+  type: actionTypes.ADD_POKEMON_TEAM,
+});
+
+export const addPokemonTeamSuccess = (
+  payload: PokemonInterface[]
+): types.AddPokemonTeamSuccess => ({
+  type: actionTypes.ADD_POKEMON_TEAM_SUCCESS,
+  payload,
+});
+
+export const addPokemonTeamFailure = (
+  payload: string
+): types.AddPokemonTeamFailure => ({
+  type: actionTypes.ADD_POKEMON_TEAM_FAILURE,
+  payload,
+});

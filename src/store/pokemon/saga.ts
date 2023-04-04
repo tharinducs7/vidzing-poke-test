@@ -8,7 +8,8 @@ import {
   PokemonInterface,
   PokemonTeamInterface
 } from "@/shared/interfaces/pokemon.interface";
-
+import { toast } from 'react-toast'
+import { TOAST_MESSAGES } from "@/utils/constants";
 
 function getPokeList() {
   return axios.get("https://pokeapi.co/api/v2/pokemon?limit=151", {
@@ -64,6 +65,7 @@ function* addPokemonTeamSaga(action: { type: string; payload: PokemonTeamInterfa
   try {
     const { payload } = action;
     console.log(payload, "payload in saga");
+    toast.success(`${TOAST_MESSAGES.TEAM_SAVED}`)
    // yield put(actions.addPokemonTeamSuccess(payload));
   } catch (error) {
     console.log(error);

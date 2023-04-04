@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
-      <ToastContainer delay={3000}/>
+      <ToastContainer delay={3000} position={'top-right'}/>
     </Provider>
   );
 }

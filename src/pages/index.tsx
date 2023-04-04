@@ -87,7 +87,6 @@ export default function Home() {
   };
 
   const saveTeam = () => {
-    console.log(team);
     const Team = {
       members: team,
       id: 1

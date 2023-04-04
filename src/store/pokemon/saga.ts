@@ -6,7 +6,9 @@ import {
   Pokemon,
   PokemonApiResponse,
   PokemonInterface,
+  PokemonTeamInterface
 } from "@/shared/interfaces/pokemon.interface";
+
 
 function getPokeList() {
   return axios.get("https://pokeapi.co/api/v2/pokemon?limit=151", {
@@ -58,8 +60,22 @@ function* getPokemonListSaga() {
   }
 }
 
+function* addPokemonTeamSaga(action: { type: string; payload: PokemonTeamInterface }) {
+  try {
+    const { payload } = action;
+    console.log(payload, "payload in saga");
+   // yield put(actions.addPokemonTeamSuccess(payload));
+  } catch (error) {
+    console.log(error);
+    yield put(actions.addPokemonTeamFailure("Error adding pokemon to team"));
+  }
+}
+
 function* pokemonSaga() {
-  yield all([takeLatest(actionTypes.GET_POKEMON_LIST, getPokemonListSaga)]);
+  yield all([
+    takeLatest(actionTypes.GET_POKEMON_LIST, getPokemonListSaga),
+    takeLatest(actionTypes.ADD_POKEMON_TEAM, addPokemonTeamSaga)
+  ]);
 }
 
 export default pokemonSaga;

@@ -7,10 +7,25 @@ export interface PokemonInterface {
   // Include more information here
 }
 
+interface PokemonTeamMemberInterface {
+  id: number;
+  name: string;
+  image: string;
+  order: number
+  // Include more information here
+}
+
+export interface PokemonTeamInterface {
+  members: PokemonTeamMemberInterface[],
+  id: number
+  // Include more information here
+}
+
 export interface PokemonStateInterface {
   pokemonList: PokemonInterface[];
   fetchStatus: fetchStatus;
   error: string;
+  pokemonTeam: PokemonTeamInterface[];
 }
 
 export interface PokemonApiResponse {

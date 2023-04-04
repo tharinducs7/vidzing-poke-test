@@ -4,4 +4,5 @@ export const POKE_INITIAL_STATE: PokemonStateInterface = {
   pokemonList: [],
   fetchStatus: "idle",
   error: "",
+  pokemonTeam: []
 };

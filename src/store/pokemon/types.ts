@@ -1,5 +1,5 @@
 import type * as actionTypes from "./actions.types";
-import { PokemonInterface } from "@/shared/interfaces/pokemon.interface";
+import { PokemonInterface, PokemonTeamInterface } from "@/shared/interfaces/pokemon.interface";
 
 /****************************** GET POKEMON LIST **********************************/
 export type GetPokemonList = {
@@ -20,6 +20,7 @@ export type GetPokemonListFailure = {
 /****************************** ADD POKEMON TEAM **********************************/
 export type AddPokemonTeam = {
   type: typeof actionTypes.ADD_POKEMON_TEAM;
+  payload: PokemonTeamInterface;
 };
 
 export type AddPokemonTeamSuccess = {

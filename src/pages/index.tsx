@@ -5,14 +5,14 @@ import ordinal from "ordinal";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemonList } from "@/store/pokemon/actions";
+import { getPokemonList, addPokemonTeam } from "@/store/pokemon/actions";
 
 import MainLayout from "@/shared/Layouts/MainLayout";
 import Card from "@/components/Card";
 import TeamCard from "@/components/TeamCard";
 
 import { TOAST_MESSAGES } from "@/utils/constants";
-import { log } from "console";
+
 interface Pokemon {
   id: number;
   name: string;
@@ -88,7 +88,11 @@ export default function Home() {
 
   const saveTeam = () => {
     console.log(team);
-    
+    const Team = {
+      members: team,
+      id: 1
+    }
+    dispatch(addPokemonTeam(Team));
   }
 
   return (

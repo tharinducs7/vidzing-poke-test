@@ -21,6 +21,20 @@ export const pokemonReducer = (
         error: action.payload,
       };
     }
+    case actionsTypes.ADD_POKEMON_TEAM_SUCCESS: {
+      return {
+        ...state,
+        fetchStatus: "success",
+        pokemonTeam: action.payload,
+      };
+    }
+    case actionsTypes.ADD_POKEMON_TEAM_FAILURE: {
+      return {
+        ...state,
+        fetchStatus: "fail",
+        error: action.payload,
+      };
+    }
     default:
       return { ...state };
   }

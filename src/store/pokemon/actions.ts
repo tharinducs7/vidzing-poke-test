@@ -1,6 +1,6 @@
 import type * as types from "./types";
 import * as actionTypes from "./actions.types";
-import { PokemonInterface } from "@/shared/interfaces/pokemon.interface";
+import { PokemonInterface, PokemonTeamInterface } from "@/shared/interfaces/pokemon.interface";
 
 /****************************** GET POKEMON LIST **********************************/
 export const getPokemonList = (): types.GetPokemonList => ({
@@ -22,8 +22,9 @@ export const getPokemonListFailure = (
 });
 
 /****************************** ADD POKEMON TEAM **********************************/
-export const addPokemonTeam = (): types.AddPokemonTeam => ({
+export const addPokemonTeam = (team :PokemonTeamInterface): types.AddPokemonTeam => ({
   type: actionTypes.ADD_POKEMON_TEAM,
+  payload: team
 });
 
 export const addPokemonTeamSuccess = (

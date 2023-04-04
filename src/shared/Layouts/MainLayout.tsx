@@ -23,12 +23,24 @@ const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, search, searc
       >
         <div className="header">
           <button className="left-button" onClick={() => toggleSidebar()}>  <i className='bx bx-menu' style={{ color: "#fdf500" }} ></i> </button>
-          <input type="text" className="search-box" value={searchTerm} placeholder="Search for a Pokemon..." onChange={(e) => search(e)} />
+          <div className="search_box">
+            <div className="search">
+              <div className="select_area">
+               <i className='bx bx-search-alt-2' style={{color:'#00a0fd'}}  ></i>
+              </div>
+
+              <div className="line"></div>
+
+              <div className="text_and-icon">
+                <input type="text" className="search_text" id="search_text" value={searchTerm} placeholder="Find your pokemon...." onChange={(e) => search(e)}/>
+              </div>
+            </div>
+          </div>
+          </div>
+          {content}
         </div>
-        {content}
       </div>
-    </div>
-  );
+      );
 };
 
-export default MainLayout;
+      export default MainLayout;

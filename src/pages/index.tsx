@@ -17,6 +17,7 @@ interface Pokemon {
   id: number;
   name: string;
   image: string;
+  order: number;
 }
 
 export default function Home() {
@@ -46,6 +47,7 @@ export default function Home() {
 
   const handleAddToTeam = (pokemon: Pokemon) => {
     if (team.length < 6 && !team.includes(pokemon)) {
+      pokemon.order = team.length+1
       setTeam([...team, pokemon]);
       setSearchTerm('')
       setIsSidebarOpen(true)
@@ -77,11 +79,17 @@ export default function Home() {
     }
     const newPokemonList = [...team];
     const [removed] = newPokemonList.splice(draggingIndex, 1);
+    removed.order = targetIndex+1;
     newPokemonList.splice(targetIndex, 0, removed);
     setTeam(newPokemonList);
     setDraggingIndex(targetIndex);
     toast(`${removed.name} moved to ${ordinal(targetIndex + 1)}`)
   };
+
+  const saveTeam = () => {
+    console.log(team);
+    
+  }
 
   return (
     <>
@@ -98,7 +106,6 @@ export default function Home() {
       <main>
         <div className="app">
           <MainLayout
-            teamLength={team.length}
             search={handleSearch}
             searchTerm={searchTerm}
             sidebarOpen={isSidebarOpen}
@@ -128,6 +135,7 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
+                  {team.length === 6 && <button className="button-10" role="button" onClick={() => saveTeam()}>Save Team</button>}
                 </div>
               </div>
             </div>}

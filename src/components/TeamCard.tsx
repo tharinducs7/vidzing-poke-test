@@ -33,7 +33,6 @@ const TeamCard = ({ pokemon, handleRemoveFromTeam, handleDragStart, handleDragOv
                     <span className="team__id">#{padWithLeadingZeros(pokemon.id, 3)}</span>
                 </div>
             </div>
-
             <div>
                 <a href="#" className="team__actions"><i className='bx bxs-message-square-x bx-rotate-270' style={{ color: '#ff0000' }} onClick={() => handleRemoveFromTeam(pokemon)}></i></a>
             </div>

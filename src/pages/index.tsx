@@ -6,7 +6,8 @@ import { getPokemonList } from "@/store/pokemon/actions";
 import Image from "next/image";
 import MainLayout from "@/shared/Layouts/MainLayout";
 
-import Card from "@/components/card/Card";
+import Card from "@/components/Card";
+import TeamCard from "@/components/TeamCard";
 
 interface Pokemon {
   id: number;
@@ -67,11 +68,10 @@ export default function Home() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
       </Head>
       <main>
         <div className="app">
-
-
           <MainLayout
             teamLength={team.length}
             sidebar={<div className="sidebar">
@@ -81,25 +81,11 @@ export default function Home() {
                   className="pokemon-logo"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
                 />
-                <div className="drop">
-                  <div className="drop__container">
-                    <div className="drop__list" id="drop-items">
+                <div className="team">
+                  <div className="team__container">
+                    <div className="team__list" id="team-items">
                       {team.map((pokemon: any, key: number) => (
-                        <div className="drop__card" key={key}>
-                          <div className="drop__data">
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`} alt="" className="drop__img" />
-                            <div>
-                              <h1 className="drop__name">{pokemon.name}</h1>
-                              <span className="drop__profession">Front-End Developer</span>
-                            </div>
-                          </div>
-
-                          <div>
-                            <a href="#" className="drop__social"><i className='bx bxl-instagram'></i> b </a>
-                            <a href="#" className="drop__social"><i className='bx bxl-linkedin'></i> f</a>
-                            <a href="#" className="drop__social"><i className='bx bxl-twitter'></i>f</a>
-                          </div>
-                        </div>
+                        <TeamCard pokemon={pokemon} key={key}/>
                       ))}
                     </div>
                   </div>

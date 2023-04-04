@@ -1,7 +1,7 @@
 import React from 'react';
-import { padWithLeadingZeros } from '@/utils/helpers';
-// import './card.scss';
-
+import { padWithLeadingZeros, pokemonTypes, pokemonSVG } from '@/utils/helpers';
+import PokeAPI from "pokeapi-typescript";
+import { log } from 'console';
 interface Pokemon {
   id: number;
   name: string;
@@ -13,12 +13,19 @@ interface PokemonCard {
   addToTeam: (pokemon: Pokemon) => void;
 }
 
+interface PokeType {
+    id: number,
+    color: string,
+    type: []
+}
 
 const Card = ({ pokemon, addToTeam }: PokemonCard) => {
+    const pokeType = pokemonTypes.find(type => type.id === pokemon.id);
+    
     return (
         <div className="pokemon">
             <div className="picture">
-                <img className="img-fluid" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`} alt={pokemon.name} />
+                <img className="img-fluid" src={`${pokemonSVG}${pokemon.id}.svg`} alt={pokemon.name} />
             </div>
             <div className="team-content">
                 <h3 className="name">#{padWithLeadingZeros(pokemon.id, 3)}</h3>

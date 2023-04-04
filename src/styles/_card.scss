@@ -38,7 +38,6 @@
     content: "";
     width: 100%;
     height: 100%;
-    //border-radius: 50%;
     background-color: transparent;
     position: absolute;
     top: 0;
@@ -49,13 +48,11 @@
 .pokemon .picture img {
     width: 100%;
     height: 110%;
-    // border-radius: 50%;
     transform: scale(1);
     transition: all 0.9s ease 0s;
 }
 
 .pokemon:hover .picture img {
-    // box-shadow: 0 0 0 5px #f7f5ec;
     transform: scale(0.7);
 }
 

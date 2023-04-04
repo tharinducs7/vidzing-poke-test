@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 interface MainLayoutProps {
   sidebar: React.ReactNode;
   content: React.ReactNode;
@@ -8,7 +8,7 @@ interface MainLayoutProps {
   toggleSidebar: () => void;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, search, searchTerm, sidebarOpen,  toggleSidebar}) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, search, searchTerm, sidebarOpen, toggleSidebar }) => {
   return (
     <div className="main-layout">
       <div
@@ -21,11 +21,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, search, searc
         className={`main-layout__content ${sidebarOpen ? "main-layout__content--shrink" : "main-layout__content--streatch"
           }`}
       >
-        {/* <div className={`search-box ${sidebarOpen ? "shrink" : "strech"}`}>
-          <button className="button-30"onClick={() => toggleSidebar()}> <i className='bx  bx-dots-vertical' style={{color:"#ffffff"}} ></i> </button>
-          <input type="text" value={searchTerm} placeholder="Search for a Pokemon..." onChange={(e) => search(e)} />
-          <button> <i className='bx bx-search-alt-2' style={{color:'#ffffff'}}  ></i></button>
-        </div> */}
+        <div className="header">
+          <button className="left-button" onClick={() => toggleSidebar()}>  <i className='bx bx-menu' style={{ color: "#fdf500" }} ></i> </button>
+          <input type="text" className="search-box" value={searchTerm} placeholder="Search for a Pokemon..." onChange={(e) => search(e)} />
+        </div>
         {content}
       </div>
     </div>

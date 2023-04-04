@@ -9,7 +9,7 @@ import { getPokemonList, addPokemonTeam } from "@/store/pokemon/actions";
 
 import MainLayout from "@/shared/Layouts/MainLayout";
 import Card from "@/components/Card";
-import TeamCard from "@/components/TeamCard";
+import TeamPanel from "@/components/TeamPanel";
 
 import { TOAST_MESSAGES } from "@/utils/constants";
 
@@ -21,7 +21,7 @@ interface Pokemon {
 }
 
 export default function Home() {
-  const pokeman = useSelector((state: any) => state.pokemon);
+  const pokemon = useSelector((state: any) => state.pokemon);
   const dispatch = useDispatch();
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -33,21 +33,29 @@ export default function Home() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  /**
+   * Fetch pokemon list 
+   */
   useEffect(() => {
     dispatch(getPokemonList());
   }, [dispatch]);
+
 
   const handleSearch = (event: any) => {
     setSearchTerm(event.target.value);
   }
 
-  const filteredPokemons = pokeman.pokemonList.filter((pokemon: Pokemon) =>
+  const filteredPokemons = pokemon.pokemonList.filter((pokemon: Pokemon) =>
     pokemon.name.toString().includes(searchTerm)
   );
 
+  /**
+   * Add pokemon to the team
+   * @param pokemon 
+   */
   const handleAddToTeam = (pokemon: Pokemon) => {
     if (team.length < 6 && !team.includes(pokemon)) {
-      pokemon.order = team.length+1
+      pokemon.order = team.length + 1
       setTeam([...team, pokemon]);
       setSearchTerm('')
       setIsSidebarOpen(true)
@@ -57,6 +65,10 @@ export default function Home() {
     }
   };
 
+  /**
+   * Remove pokemon from the team
+   * @param pokemon 
+   */
   const handleRemoveFromTeam = (pokemon: Pokemon) => {
     if (team.length !== 0) {
       setTeam(team.filter((p) => p !== pokemon));
@@ -67,10 +79,21 @@ export default function Home() {
     }
   };
 
+  /**
+   * Re-ordering pokemon's - start dragging the element
+   * @param event 
+   * @param index 
+   */
   const handleDragStart = (event: React.DragEvent<HTMLLIElement>, index: number) => {
     setDraggingIndex(index);
   };
 
+  /**
+   * Re-ordering pokemon's - finish dragging the element
+   * @param event 
+   * @param index 
+   * @returns 
+   */
   const handleDragOver = (event: React.DragEvent<HTMLLIElement>, index: number) => {
     event.preventDefault();
     const targetIndex = index;
@@ -78,14 +101,17 @@ export default function Home() {
       return;
     }
     const newPokemonList = [...team];
-    const [removed] = newPokemonList.splice(draggingIndex, 1);
-    removed.order = targetIndex+1;
-    newPokemonList.splice(targetIndex, 0, removed);
+    const [movingPokemon] = newPokemonList.splice(draggingIndex, 1);
+    movingPokemon.order = targetIndex + 1;
+    newPokemonList.splice(targetIndex, 0, movingPokemon);
     setTeam(newPokemonList);
     setDraggingIndex(targetIndex);
-    toast(`${removed.name} moved to ${ordinal(targetIndex + 1)}`)
+    toast(`${movingPokemon.name} moved to ${ordinal(targetIndex + 1)}`)
   };
 
+  /**
+   * Save Pokemon Team
+   */
   const saveTeam = () => {
     const Team = {
       members: team,
@@ -113,42 +139,19 @@ export default function Home() {
             searchTerm={searchTerm}
             sidebarOpen={isSidebarOpen}
             toggleSidebar={toggleSidebar}
-            sidebar={<div className="sidebar">
-              <div className="container">
-                <img
-                  alt="Official Pokemon Logo"
-                  className="pokemon-logo"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
-                />
-                <div className="team">
-                  <button className="close-button" onClick={() => toggleSidebar()}>
-                    <i className='bx bx-window-close' style={{ color: "#f30000" }}  ></i>
-                  </button>
-                  <div className="team__container">
-                    <div className="team__list" id="team-items">
-                      {team.map((pokemon: any, key: number) => (
-                        <TeamCard
-                          pokemon={pokemon}
-                          key={key}
-                          index={key}
-                          handleRemoveFromTeam={handleRemoveFromTeam}
-                          handleDragStart={handleDragStart}
-                          handleDragOver={handleDragOver}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  {team.length === 6 && <button className="button-10" role="button" onClick={() => saveTeam()}>Save Team</button>}
-                </div>
-              </div>
-            </div>}
+            sidebar={<TeamPanel
+              toggleSidebar={toggleSidebar}
+              team={team}
+              saveTeam={saveTeam}
+              handleRemoveFromTeam={handleRemoveFromTeam}
+              handleDragStart={handleDragStart}
+              handleDragOver={handleDragOver}
+            />}
             content={<>
-              <div className="flex-container">
+              <div className="flex-container scrollable-container">
                 {filteredPokemons.map((pokemon: any, key: number) => (
                   <div className="flex-item" key={key}>
-                    <div className="contenedorCards">
-                      <Card pokemon={pokemon} addToTeam={handleAddToTeam} team={team} />
-                    </div>
+                    <Card pokemon={pokemon} addToTeam={handleAddToTeam} team={team} />
                   </div>
                 ))}
               </div>

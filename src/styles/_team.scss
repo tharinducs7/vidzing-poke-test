@@ -103,25 +103,28 @@ button:before {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+   // transform: translate(-50%, -50%);
 }
 
 .close-button:before {
-    content: "\00D7";
     color: red;
-}
-
-.up-button:before {
-    content: "\25B2";
-    transform: rotate(-90deg);
-}
-
-.down-button:before {
-    content: "\25BC";
-    transform: rotate(90deg);
 }
 
 .order {
     margin: 10px;
     background-color: antiquewhite;
+}
+
+.close-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: 260px;
+    outline: none;
+    padding: 0;
+}
+
+.close-button:hover {
+    color: #ff0000;
 }

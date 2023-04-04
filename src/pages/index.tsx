@@ -12,6 +12,7 @@ import Card from "@/components/Card";
 import TeamCard from "@/components/TeamCard";
 
 import { TOAST_MESSAGES } from "@/utils/constants";
+import { log } from "console";
 interface Pokemon {
   id: number;
   name: string;
@@ -22,7 +23,6 @@ export default function Home() {
   const pokeman = useSelector((state: any) => state.pokemon);
   const dispatch = useDispatch();
 
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [team, setTeam] = useState<Pokemon[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -48,6 +48,7 @@ export default function Home() {
     if (team.length < 6 && !team.includes(pokemon)) {
       setTeam([...team, pokemon]);
       setSearchTerm('')
+      setIsSidebarOpen(true)
       toast.success(`${pokemon.name} ${TOAST_MESSAGES.ADDED_TO_TEAM}`)
     } else {
       toast.warn(`${TOAST_MESSAGES.TEAM_FULL}`)
@@ -55,8 +56,13 @@ export default function Home() {
   };
 
   const handleRemoveFromTeam = (pokemon: Pokemon) => {
-    setTeam(team.filter((p) => p !== pokemon));
-    toast.info(`${pokemon.name} ${TOAST_MESSAGES.REMOVED_FROM_TEAM}`)
+    if (team.length !== 0) {
+      setTeam(team.filter((p) => p !== pokemon));
+      toast.info(`${pokemon.name} ${TOAST_MESSAGES.REMOVED_FROM_TEAM}`)
+      if (team.length === 1) setIsSidebarOpen(false)
+    } else {
+      setIsSidebarOpen(false)
+    }
   };
 
   const handleDragStart = (event: React.DragEvent<HTMLLIElement>, index: number) => {
@@ -74,7 +80,7 @@ export default function Home() {
     newPokemonList.splice(targetIndex, 0, removed);
     setTeam(newPokemonList);
     setDraggingIndex(targetIndex);
-     toast(`${removed.name} moved to ${ordinal(targetIndex+1)}`)
+    toast(`${removed.name} moved to ${ordinal(targetIndex + 1)}`)
   };
 
   return (
@@ -95,6 +101,8 @@ export default function Home() {
             teamLength={team.length}
             search={handleSearch}
             searchTerm={searchTerm}
+            sidebarOpen={isSidebarOpen}
+            toggleSidebar={toggleSidebar}
             sidebar={<div className="sidebar">
               <div className="container">
                 <img
@@ -103,18 +111,21 @@ export default function Home() {
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
                 />
                 <div className="team">
+                  <button className="close-button" onClick={() => toggleSidebar()}>
+                    <i className='bx bx-window-close' style={{ color: "#f30000" }}  ></i>
+                  </button>
                   <div className="team__container">
                     <div className="team__list" id="team-items">
-                        {team.map((pokemon: any, key: number) => (
-                          <TeamCard 
-                            pokemon={pokemon} 
-                            key={key} 
-                            index={key}
-                            handleRemoveFromTeam={handleRemoveFromTeam} 
-                            handleDragStart={handleDragStart}
-                            handleDragOver={handleDragOver} 
-                          />
-                        ))}
+                      {team.map((pokemon: any, key: number) => (
+                        <TeamCard
+                          pokemon={pokemon}
+                          key={key}
+                          index={key}
+                          handleRemoveFromTeam={handleRemoveFromTeam}
+                          handleDragStart={handleDragStart}
+                          handleDragOver={handleDragOver}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -125,7 +136,7 @@ export default function Home() {
                 {filteredPokemons.map((pokemon: any, key: number) => (
                   <div className="flex-item" key={key}>
                     <div className="contenedorCards">
-                      <Card pokemon={pokemon} addToTeam={handleAddToTeam} team={team}/>
+                      <Card pokemon={pokemon} addToTeam={handleAddToTeam} team={team} />
                     </div>
                   </div>
                 ))}

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { padWithLeadingZeros, pokemonTypes, pokemonSVG } from '@/utils/helpers';
 import PokeAPI from "pokeapi-typescript";

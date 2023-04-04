@@ -7,30 +7,27 @@ interface MainLayoutProps {
   teamLength: number
   search: (e: any) => void;
   searchTerm: string;
+  sidebarOpen: boolean;
+  toggleSidebar: () => void;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, teamLength, search, searchTerm }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const isSearchBarFixed = true;
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prevIsSidebarOpen) => !prevIsSidebarOpen);
-  };
-
+const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, teamLength, search, searchTerm, sidebarOpen,  toggleSidebar}) => {
   return (
     <div className="main-layout">
       <div
-        className={`main-layout__sidebar ${teamLength !== 0 ? "main-layout__sidebar--open" : ""
+        className={`main-layout__sidebar ${sidebarOpen ? "main-layout__sidebar--open" : ""
           }`}
       >
         {sidebar}
       </div>
       <div
-        className={`main-layout__content ${teamLength !== 0 ? "main-layout__content--shrink" : "main-layout__content--streatch"
+        className={`main-layout__content ${sidebarOpen ? "main-layout__content--shrink" : "main-layout__content--streatch"
           }`}
       >
-        <div className={`search-box ${teamLength !== 0 ? "shrink" : "strech"}`}>
+        <div className={`search-box ${sidebarOpen ? "shrink" : "strech"}`}>
+          <button onClick={() => toggleSidebar()}> <i className='bx  bx-dots-vertical' style={{color:"#ffffff"}} ></i> </button>
           <input type="text" value={searchTerm} placeholder="Search for a Pokemon..." onChange={(e) => search(e)} />
-          <button> Search</button>
+          <button> <i className='bx bx-search-alt-2' style={{color:'#ffffff'}}  ></i></button>
         </div>
         {content}
       </div>

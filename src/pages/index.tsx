@@ -7,7 +7,9 @@ import Image from "next/image";
 import MainLayout from "@/shared/Layouts/MainLayout";
 import Card from "@/components/Card";
 import TeamCard from "@/components/TeamCard";
-
+import { ToastContainer, toast } from 'react-toast'
+import ordinal from "ordinal";
+import { log } from "console";
 interface Pokemon {
   id: number;
   name: string;
@@ -44,11 +46,15 @@ export default function Home() {
     if (team.length < 6 && !team.includes(pokemon)) {
       setTeam([...team, pokemon]);
       setSearchTerm('')
+      toast.success(`${pokemon.name} added to the team`)
+    } else {
+      toast.warn(`Sorry, you can't add more pokemons. Please remove some.`)
     }
   };
 
   const handleRemoveFromTeam = (pokemon: Pokemon) => {
     setTeam(team.filter((p) => p !== pokemon));
+    toast.info(`${pokemon.name} removed from the team`)
   };
 
   const handleDragStart = (event: React.DragEvent<HTMLLIElement>, index: number) => {
@@ -66,6 +72,7 @@ export default function Home() {
     newPokemonList.splice(targetIndex, 0, removed);
     setTeam(newPokemonList);
     setDraggingIndex(targetIndex);
+     toast(`${removed.name} moved to ${ordinal(targetIndex+1)}`)
   };
 
   return (
@@ -116,7 +123,7 @@ export default function Home() {
                 {filteredPokemons.map((pokemon: any, key: number) => (
                   <div className="flex-item" key={key}>
                     <div className="contenedorCards">
-                      <Card pokemon={pokemon} addToTeam={handleAddToTeam} />
+                      <Card pokemon={pokemon} addToTeam={handleAddToTeam} team={team}/>
                     </div>
                   </div>
                 ))}

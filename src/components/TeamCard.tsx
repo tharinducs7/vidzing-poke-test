@@ -28,7 +28,6 @@ const TeamCard = ({ pokemon, handleRemoveFromTeam, handleDragStart, handleDragOv
                 <span className='order'>{padWithLeadingZeros(index+1, 2)}</span>
                 <img src={`${pokemonSVG}${pokemon.id}.svg`} alt={pokemon.name} className="team__img" />
                 <div>
-                    
                     <h1 className="team__name">{pokemon.name}</h1>
                     <span className="team__id">#{padWithLeadingZeros(pokemon.id, 3)}</span>
                 </div>

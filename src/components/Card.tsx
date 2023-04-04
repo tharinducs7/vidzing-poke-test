@@ -10,6 +10,7 @@ interface Pokemon {
 
 interface PokemonCard {
   pokemon: Pokemon;
+  team: Pokemon[];
   addToTeam: (pokemon: Pokemon) => void;
 }
 
@@ -19,9 +20,10 @@ interface PokeType {
     type: []
 }
 
-const Card = ({ pokemon, addToTeam }: PokemonCard) => {
+const Card = ({ pokemon, addToTeam, team }: PokemonCard) => {
     const pokeType = pokemonTypes.find(type => type.id === pokemon.id);
-    
+    const isAlreadyInTheTeam = team.includes(pokemon);
+
     return (
         <div className="pokemon">
             <div className="picture">
@@ -31,8 +33,8 @@ const Card = ({ pokemon, addToTeam }: PokemonCard) => {
                 <h3 className="name">#{padWithLeadingZeros(pokemon.id, 3)}</h3>
                 <h4 className="title">{pokemon.name}</h4>
             </div>
-            <ul className="add-to-team">
-                <li><button className='text-button-color' onClick={() => addToTeam(pokemon)}> Add to Team </button></li>
+            <ul className={isAlreadyInTheTeam ? "in-the-team": "add-to-team"}>
+                <li><button disabled={isAlreadyInTheTeam ? true: false} className='text-button-color' onClick={() => addToTeam(pokemon)}> {isAlreadyInTheTeam ? 'Added to Team': 'Add to Team'} </button></li>
             </ul>
         </div>
     );

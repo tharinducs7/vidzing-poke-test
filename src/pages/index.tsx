@@ -40,10 +40,10 @@ export default function Home() {
     pokemon.name.toString().includes(searchTerm)
   );
 
-
   const handleAddToTeam = (pokemon: Pokemon) => {
     if (team.length < 6 && !team.includes(pokemon)) {
       setTeam([...team, pokemon]);
+      setSearchTerm('')
     }
   };
 
@@ -74,6 +74,8 @@ export default function Home() {
         <div className="app">
           <MainLayout
             teamLength={team.length}
+            search={handleSearch}
+            searchTerm={searchTerm}
             sidebar={<div className="sidebar">
               <div className="container">
                 <img
@@ -85,7 +87,7 @@ export default function Home() {
                   <div className="team__container">
                     <div className="team__list" id="team-items">
                       {team.map((pokemon: any, key: number) => (
-                        <TeamCard pokemon={pokemon} key={key}/>
+                        <TeamCard pokemon={pokemon} key={key} handleRemoveFromTeam={handleRemoveFromTeam}/>
                       ))}
                     </div>
                   </div>

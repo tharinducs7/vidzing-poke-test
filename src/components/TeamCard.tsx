@@ -9,9 +9,10 @@ interface Pokemon {
 
 interface PokemonTeamCard {
     pokemon: Pokemon;
+    handleRemoveFromTeam: (pokemon: Pokemon) => void;
 }
 
-const TeamCard = ({ pokemon }: PokemonTeamCard) => {
+const TeamCard = ({ pokemon, handleRemoveFromTeam }: PokemonTeamCard) => {
     const pokeType = pokemonTypes.find(type => type.id === pokemon.id);
 
     return (
@@ -27,7 +28,7 @@ const TeamCard = ({ pokemon }: PokemonTeamCard) => {
             <div>
                 <a href="#" className="team__actions"><i className='bx bxs-chevron-up-square'></i></a>
                 <a href="#" className="team__actions"><i className='bx bxs-chevron-down-square' ></i></a>
-                <a href="#" className="team__actions"><i className='bx bxs-message-square-x bx-rotate-270' style={{color:'#ff0000'}}></i></a>
+                <a href="#" className="team__actions"><i className='bx bxs-message-square-x bx-rotate-270' style={{color:'#ff0000'}} onClick={() => handleRemoveFromTeam(pokemon)}></i></a>
             </div>
         </div>
     );

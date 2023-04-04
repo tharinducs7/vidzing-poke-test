@@ -5,9 +5,11 @@ interface MainLayoutProps {
   sidebar: React.ReactNode;
   content: React.ReactNode;
   teamLength: number
+  search: (e: any) => void;
+  searchTerm: string;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, teamLength }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, teamLength, search, searchTerm }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const isSearchBarFixed = true;
   const toggleSidebar = () => {
@@ -27,8 +29,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, content, teamLength })
           }`}
       >
         <div className={`search-box ${teamLength !== 0 ? "shrink" : "strech"}`}>
-          <input type="text" placeholder="Search for a Pokemon..." />
-          <button>Search</button>
+          <input type="text" value={searchTerm} placeholder="Search for a Pokemon..." onChange={(e) => search(e)} />
+          <button> Search</button>
         </div>
         {content}
       </div>

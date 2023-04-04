@@ -1,15 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
+import { toast } from 'react-toast'
+import ordinal from "ordinal";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonList } from "@/store/pokemon/actions";
-import Image from "next/image";
+
 import MainLayout from "@/shared/Layouts/MainLayout";
 import Card from "@/components/Card";
 import TeamCard from "@/components/TeamCard";
-import { ToastContainer, toast } from 'react-toast'
-import ordinal from "ordinal";
-import { log } from "console";
+
+import { TOAST_MESSAGES } from "@/utils/constants";
 interface Pokemon {
   id: number;
   name: string;
@@ -46,15 +48,15 @@ export default function Home() {
     if (team.length < 6 && !team.includes(pokemon)) {
       setTeam([...team, pokemon]);
       setSearchTerm('')
-      toast.success(`${pokemon.name} added to the team`)
+      toast.success(`${pokemon.name} ${TOAST_MESSAGES.ADDED_TO_TEAM}`)
     } else {
-      toast.warn(`Sorry, you can't add more pokemons. Please remove some.`)
+      toast.warn(`${TOAST_MESSAGES.TEAM_FULL}`)
     }
   };
 
   const handleRemoveFromTeam = (pokemon: Pokemon) => {
     setTeam(team.filter((p) => p !== pokemon));
-    toast.info(`${pokemon.name} removed from the team`)
+    toast.info(`${pokemon.name} ${TOAST_MESSAGES.REMOVED_FROM_TEAM}`)
   };
 
   const handleDragStart = (event: React.DragEvent<HTMLLIElement>, index: number) => {

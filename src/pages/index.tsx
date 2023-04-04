@@ -13,6 +13,7 @@ import TeamPanel from "@/components/TeamPanel";
 
 import { TOAST_MESSAGES } from "@/utils/constants";
 
+
 interface Pokemon {
   id: number;
   name: string;
@@ -42,11 +43,13 @@ export default function Home() {
 
 
   const handleSearch = (event: any) => {
+    console.log(event.target.value, "test");
+    
     setSearchTerm(event.target.value);
   }
 
   const filteredPokemons = pokemon.pokemonList.filter((pokemon: Pokemon) =>
-    pokemon.name.toString().includes(searchTerm)
+     pokemon.id.toString() === searchTerm  || pokemon.name.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
   /**

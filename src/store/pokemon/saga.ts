@@ -19,6 +19,14 @@ function getPokeList() {
   });
 }
 
+function addPokeTeam(data: PokemonTeamInterface) {
+  return axios.post("/api", data,{
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
 function getPokemon(url: string) {
   return axios.get(url, {
     headers: {
@@ -63,10 +71,12 @@ function* getPokemonListSaga() {
 
 function* addPokemonTeamSaga(action: { type: string; payload: PokemonTeamInterface }) {
   try {
-    const { payload } = action;
-    console.log(payload, "payload in saga");
-    toast.success(`${TOAST_MESSAGES.TEAM_SAVED}`)
-   // yield put(actions.addPokemonTeamSuccess(payload));
+     const { payload } = action;
+     const pokeListResponse: { data: PokemonTeamInterface } = yield addPokeTeam(payload);  
+    
+     yield put(actions.addPokemonTeamSuccess(pokeListResponse.data));
+     toast.success(`${TOAST_MESSAGES.TEAM_SAVED}`)
+   
   } catch (error) {
     console.log(error);
     yield put(actions.addPokemonTeamFailure("Error adding pokemon to team"));

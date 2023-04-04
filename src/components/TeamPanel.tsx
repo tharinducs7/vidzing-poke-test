@@ -30,9 +30,6 @@ const TeamPanel = ({ handleRemoveFromTeam, handleDragStart, handleDragOver, team
                 />
 
                 <div className="team">
-                    <button className="close-button" onClick={() => toggleSidebar()}>
-                        <i className='bx bx-window-close' style={{ color: "#f30000" }}  ></i>
-                    </button>
                     <div className="team__container">
                         <div className="team__list" id="team-items">
                             {team.map((pokemon: any, key: number) => (
@@ -48,6 +45,12 @@ const TeamPanel = ({ handleRemoveFromTeam, handleDragStart, handleDragOver, team
                         </div>
                     </div>
                     {team.length === 6 && <button className="button-10" role="button" onClick={() => saveTeam()}>Save Team</button>}
+                    {team.length === 0 && 
+                        <>
+                            <h2 className='no-team'>Build Your offshore pokemon team</h2>
+                            <img src={`https://freepngimg.com/download/temp_png/109852-ketchum-ash-png-download-free.jpeg`} alt="no-team" />
+                        </>
+                    }
                 </div>
             </div>
         </div>

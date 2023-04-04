@@ -25,7 +25,7 @@ export type AddPokemonTeam = {
 
 export type AddPokemonTeamSuccess = {
   type: typeof actionTypes.ADD_POKEMON_TEAM_SUCCESS;
-  payload: PokemonInterface[];
+  payload: PokemonTeamInterface;
 };
 
 export type AddPokemonTeamFailure = {

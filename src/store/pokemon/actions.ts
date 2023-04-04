@@ -28,7 +28,7 @@ export const addPokemonTeam = (team :PokemonTeamInterface): types.AddPokemonTeam
 });
 
 export const addPokemonTeamSuccess = (
-  payload: PokemonInterface[]
+  payload: PokemonTeamInterface
 ): types.AddPokemonTeamSuccess => ({
   type: actionTypes.ADD_POKEMON_TEAM_SUCCESS,
   payload,
